@@ -5,8 +5,6 @@ const accountLinks = [
   { href: "/account/orders", label: "My Orders" },
   { href: "/account/wallet", label: "Wallet" },
   { href: "/account/settings", label: "Settings" },
-  { href: "/account/signin", label: "Sign In" },
-  { href: "/account/signup", label: "Create Account" },
 ];
 
 export default function AccountLayout({ children }: { children: ReactNode }) {
@@ -33,6 +31,20 @@ export default function AccountLayout({ children }: { children: ReactNode }) {
                   {link.label}
                 </Link>
               ))}
+              <div className="pt-4 mt-4 border-t border-black/10">
+                <Link
+                  href="/account/signin"
+                  className="block py-2 pl-4 text-sm uppercase tracking-[0.1em] text-black/60 hover:text-black"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/account/signup"
+                  className="block py-2 pl-4 text-sm uppercase tracking-[0.1em] text-black/60 hover:text-black"
+                >
+                  Create Account
+                </Link>
+              </div>
             </nav>
           </div>
           <div className="md:col-span-3">

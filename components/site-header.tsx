@@ -45,10 +45,7 @@ export function SiteHeader() {
           <p>United States / English</p>
           <div className="flex items-center gap-6">
             <button>Search</button>
-            <div className="flex items-center gap-2">
-              <AccountIcon />
-              <span className="hidden md:inline">Account</span>
-            </div>
+            <button>Shipping</button>
           </div>
         </div>
       </div>
