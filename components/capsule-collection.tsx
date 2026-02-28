@@ -78,6 +78,38 @@ const products: CapsuleProduct[] = [
     size: "75ml",
     price: "$190",
     tone: "from-[#dfd9d0] to-[#8e8478]"
+  },
+  {
+    slug: "obsidian-tonka",
+    name: "Obsidian Tonka",
+    category: "men",
+    size: "100ml",
+    price: "$240",
+    tone: "from-[#d8d0c2] to-[#6f5b3b]"
+  },
+  {
+    slug: "silk-amber",
+    name: "Silk Amber",
+    category: "women",
+    size: "90ml",
+    price: "$225",
+    tone: "from-[#eadfcd] to-[#ae8a61]"
+  },
+  {
+    slug: "black-saffron",
+    name: "Black Saffron",
+    category: "men",
+    size: "75ml",
+    price: "$198",
+    tone: "from-[#ddd2c0] to-[#806645]"
+  },
+  {
+    slug: "velvet-rose",
+    name: "Velvet Rose",
+    category: "women",
+    size: "100ml",
+    price: "$230",
+    tone: "from-[#ead7d3] to-[#9c7464]"
   }
 ];
 
@@ -86,25 +118,22 @@ export function CapsuleCollection() {
 
   const visibleProducts = useMemo(() => {
     if (activeTab === "all") {
-      return products.slice(0, 6);
+      return products;
     }
     return products.filter((item) => item.category === activeTab);
   }, [activeTab]);
 
   return (
-    <section className="py-20 md:py-28">
-      <div className="container-luxe">
-        <div className="mb-12 flex items-end justify-between gap-6">
-          <div>
+    <section className="py-20 md:py-32">
+      <div className="px-5 md:px-10">
+        <div className="mb-12 border-b border-black/10 pb-8 text-center">
+          <div className="mx-auto max-w-4xl">
             <p className="kicker">Fragrances</p>
-            <h2 className="mt-4 font-display text-4xl leading-[0.96] md:text-5xl">Explore The Collection</h2>
+            <h2 className="mt-4 font-display text-4xl leading-[0.95] md:text-6xl">Explore The Collection</h2>
           </div>
-          <Link href="/collection" className="hidden border-b border-secondary pb-1 text-[10px] uppercase tracking-[0.24em] md:inline-block">
-            View All
-          </Link>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-12 border-b border-black/10 pb-6 md:justify-start">
+        <div className="mb-12 flex flex-wrap items-center justify-center gap-10 border-b border-black/10 pb-6">
           <button
             onClick={() => setActiveTab("all")}
             className={`pb-2 text-[10px] uppercase tracking-[0.28em] transition ${
@@ -137,20 +166,25 @@ export function CapsuleCollection() {
           </button>
         </div>
 
-        <div className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {visibleProducts.map((product) => (
             <article key={product.slug} className="group">
               <Link href={`/product/${product.slug}`} className="luxe-image block">
-                <div className={`relative aspect-[4/5] bg-gradient-to-b ${product.tone}`}>
-                  <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.08),transparent_45%)]" />
+                <div className={`relative aspect-[7/8] bg-gradient-to-b ${product.tone}`}>
+                  <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.12),transparent_48%)] transition group-hover:bg-[linear-gradient(to_top,rgba(0,0,0,0.18),transparent_52%)]" />
+                  <div className="absolute bottom-4 left-4 text-[10px] uppercase tracking-[0.2em] text-white/0 transition group-hover:text-white/90">
+                    Discover
+                  </div>
                 </div>
               </Link>
-              <div className="mt-6 text-center sm:text-left">
+              <div className="mt-6 text-center">
                 <p className="font-display text-[36px] leading-none">{product.name}</p>
                 <p className="mt-3 text-[10px] uppercase tracking-[0.26em] text-secondary/60">
                   {product.size}
                 </p>
-                <p className="mt-4 text-[12px] uppercase tracking-[0.18em]">{product.price}</p>
+                <p className="mt-4 text-[12px] uppercase tracking-[0.18em] transition group-hover:tracking-[0.22em]">
+                  {product.price}
+                </p>
               </div>
             </article>
           ))}
