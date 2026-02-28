@@ -124,34 +124,34 @@ export function CapsuleCollection() {
   }, [activeTab]);
 
   return (
-    <section className="py-20 md:py-32">
+    <section className="py-16 md:py-24">
       <div className="px-5 md:px-10">
-        <div className="mb-16 border-b border-black/10 pb-12 text-center">
-          <div className="mx-auto max-w-5xl">
-            <p className="kicker text-xs tracking-[0.3em] text-black/60">EXCLUSIVE FRAGRANCES</p>
-            <h2 className="mt-6 font-display text-5xl leading-[0.9] md:text-7xl lg:text-8xl">Explore The Collection</h2>
-            <p className="mx-auto mt-8 max-w-2xl text-sm uppercase leading-relaxed tracking-[0.1em] text-black/50">
+        <div className="mb-12 border-b border-black/10 pb-10 text-center">
+          <div className="mx-auto max-w-4xl">
+            <p className="kicker text-xs tracking-[0.25em] text-black/60">EXCLUSIVE FRAGRANCES</p>
+            <h2 className="mt-4 font-display text-4xl leading-[0.95] md:text-5xl">Explore The Collection</h2>
+            <p className="mx-auto mt-6 max-w-xl text-xs uppercase leading-relaxed tracking-[0.08em] text-black/50">
               A curated selection of signature scents crafted with precision and passion
             </p>
           </div>
         </div>
 
-        <div className="mb-16 flex flex-wrap items-center justify-center gap-12 border-b border-black/10 pb-8">
+        <div className="mb-12 flex flex-wrap items-center justify-center gap-10 border-b border-black/10 pb-6">
           <button
             onClick={() => setActiveTab("all")}
-            className={`pb-3 text-xs uppercase tracking-[0.3em] transition-all duration-300 ${
+            className={`pb-2 text-xs uppercase tracking-[0.2em] transition-all duration-300 ${
               activeTab === "all"
-                ? "border-b-2 border-black text-black"
+                ? "border-b border-black text-black"
                 : "text-black/40 hover:text-black"
             }`}
           >
-            All Fragrances
+            All
           </button>
           <button
             onClick={() => setActiveTab("men")}
-            className={`pb-3 text-xs uppercase tracking-[0.3em] transition-all duration-300 ${
+            className={`pb-2 text-xs uppercase tracking-[0.2em] transition-all duration-300 ${
               activeTab === "men"
-                ? "border-b-2 border-black text-black"
+                ? "border-b border-black text-black"
                 : "text-black/40 hover:text-black"
             }`}
           >
@@ -159,9 +159,9 @@ export function CapsuleCollection() {
           </button>
           <button
             onClick={() => setActiveTab("women")}
-            className={`pb-3 text-xs uppercase tracking-[0.3em] transition-all duration-300 ${
+            className={`pb-2 text-xs uppercase tracking-[0.2em] transition-all duration-300 ${
               activeTab === "women"
-                ? "border-b-2 border-black text-black"
+                ? "border-b border-black text-black"
                 : "text-black/40 hover:text-black"
             }`}
           >
@@ -169,33 +169,33 @@ export function CapsuleCollection() {
           </button>
         </div>
 
-        <div className="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {visibleProducts.map((product) => (
             <article key={product.slug} className="group">
               <Link href={`/product/${product.slug}`} className="luxe-image block overflow-hidden">
-                <div className={`relative aspect-[3/4] bg-gradient-to-b ${product.tone} transition-transform duration-700 group-hover:scale-105`}>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-6">
+                <div className={`relative aspect-[4/5] bg-gradient-to-b ${product.tone} transition-transform duration-500 group-hover:scale-102`}>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/90">
-                        {product.category === 'men' ? 'FOR HIM' : 'FOR HER'}
+                      <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-white/85">
+                        {product.category === 'men' ? 'HIM' : 'HER'}
                       </span>
-                      <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/90">
+                      <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-white/85">
                         {product.size}
                       </span>
                     </div>
                   </div>
                 </div>
               </Link>
-              <div className="mt-8 text-center">
-                <p className="font-display text-3xl tracking-tight">{product.name}</p>
-                <p className="mt-3 text-xs uppercase tracking-[0.2em] text-black/50">
-                  {product.category === 'men' ? 'Men\'s Fragrance' : 'Women\'s Fragrance'}
+              <div className="mt-6 text-center">
+                <p className="font-display text-2xl tracking-tight">{product.name}</p>
+                <p className="mt-2 text-[11px] uppercase tracking-[0.15em] text-black/50">
+                  {product.category === 'men' ? 'Men\'s' : 'Women\'s'}
                 </p>
-                <p className="mt-4 text-sm font-medium tracking-[0.1em]">
+                <p className="mt-3 text-sm font-medium tracking-[0.08em]">
                   {product.price}
                 </p>
-                <button className="mt-6 w-full border border-black/20 py-3 text-xs uppercase tracking-[0.2em] transition-all hover:border-black hover:bg-black hover:text-white">
+                <button className="mt-4 w-full border border-black/10 py-2.5 text-[11px] uppercase tracking-[0.15em] transition-all hover:border-black hover:bg-black hover:text-white">
                   Add to Bag
                 </button>
               </div>
