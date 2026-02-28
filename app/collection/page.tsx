@@ -22,16 +22,37 @@ export default function CollectionPage() {
         <div className="mt-20 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           {collection.map((item) => (
             <article key={item.slug} className="group relative">
-              <Link href={`/product/${item.slug}`} className="luxe-image block overflow-hidden">
-                <div className="aspect-[3/4] bg-gradient-to-b from-[#ece1d0] to-[#b3925c] transition-transform duration-700 group-hover:scale-105" />
-              </Link>
-              <div className="mt-8 text-center">
-                <p className="font-display text-3xl tracking-tight">{item.name}</p>
-                <p className="mt-3 text-xs uppercase tracking-[0.2em] text-black/50">{item.family}</p>
-                <p className="mt-4 text-sm font-medium tracking-[0.1em]">{item.price}</p>
-                <button className="mt-6 w-full border border-black/20 py-3 text-xs uppercase tracking-[0.2em] transition-all hover:border-black hover:bg-black hover:text-white">
-                  View Details
-                </button>
+              <div className="relative overflow-hidden">
+                <Link href={`/product/${item.slug}`} className="luxe-image block">
+                  <div className="aspect-[3/4] bg-gradient-to-b from-[#ece1d0] to-[#b3925c] transition-all duration-500 group-hover:scale-105">
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/40">
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                        <div className="text-center p-6">
+                          <div className="mb-4">
+                            <span className="inline-block border border-white/50 px-4 py-2 text-[11px] uppercase tracking-[0.2em] text-white">
+                              Quick View
+                            </span>
+                          </div>
+                          <p className="text-xs uppercase tracking-[0.15em] text-white/90 mt-4">
+                            {item.family}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+                <div className="mt-6 text-center">
+                  <p className="font-display text-2xl tracking-tight">{item.name}</p>
+                  <p className="mt-2 text-xs uppercase tracking-[0.2em] text-black/50">{item.family}</p>
+                  <p className="mt-3 text-sm font-medium tracking-[0.1em]">{item.price}</p>
+                </div>
+                {/* Hidden button that appears on hover */}
+                <div className="absolute bottom-0 left-0 right-0 translate-y-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                  <button className="w-full bg-black py-3 text-xs uppercase tracking-[0.2em] text-white transition-all hover:bg-black/90">
+                    View Details
+                  </button>
+                </div>
               </div>
             </article>
           ))}

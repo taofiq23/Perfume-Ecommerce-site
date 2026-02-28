@@ -171,33 +171,54 @@ export function CapsuleCollection() {
 
         <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {visibleProducts.map((product) => (
-            <article key={product.slug} className="group">
-              <Link href={`/product/${product.slug}`} className="luxe-image block overflow-hidden">
-                <div className={`relative aspect-[4/5] bg-gradient-to-b ${product.tone} transition-transform duration-500 group-hover:scale-102`}>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-white/85">
-                        {product.category === 'men' ? 'HIM' : 'HER'}
-                      </span>
-                      <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-white/85">
-                        {product.size}
-                      </span>
+            <article key={product.slug} className="group relative">
+              <div className="relative overflow-hidden">
+                <Link href={`/product/${product.slug}`} className="luxe-image block">
+                  <div className={`relative aspect-[4/5] bg-gradient-to-b ${product.tone} transition-all duration-500 group-hover:scale-105`}>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-white/90">
+                          {product.category === 'men' ? 'HIM' : 'HER'}
+                        </span>
+                        <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-white/90">
+                          {product.size}
+                        </span>
+                      </div>
+                    </div>
+                    {/* Hover overlay with details */}
+                    <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/40">
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                        <div className="text-center p-6">
+                          <div className="mb-4">
+                            <span className="inline-block border border-white/50 px-4 py-2 text-[11px] uppercase tracking-[0.2em] text-white">
+                              Quick View
+                            </span>
+                          </div>
+                          <p className="text-xs uppercase tracking-[0.15em] text-white/90 mt-4">
+                            {product.category === 'men' ? 'Men\'s Fragrance' : 'Women\'s Fragrance'}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                </Link>
+                {/* Always visible product info */}
+                <div className="mt-4 text-center">
+                  <p className="font-display text-xl tracking-tight">{product.name}</p>
+                  <p className="mt-1 text-[11px] uppercase tracking-[0.15em] text-black/50">
+                    {product.category === 'men' ? 'Men\'s' : 'Women\'s'}
+                  </p>
+                  <p className="mt-2 text-sm font-medium tracking-[0.08em]">
+                    {product.price}
+                  </p>
                 </div>
-              </Link>
-              <div className="mt-6 text-center">
-                <p className="font-display text-2xl tracking-tight">{product.name}</p>
-                <p className="mt-2 text-[11px] uppercase tracking-[0.15em] text-black/50">
-                  {product.category === 'men' ? 'Men\'s' : 'Women\'s'}
-                </p>
-                <p className="mt-3 text-sm font-medium tracking-[0.08em]">
-                  {product.price}
-                </p>
-                <button className="mt-4 w-full border border-black/10 py-2.5 text-[11px] uppercase tracking-[0.15em] transition-all hover:border-black hover:bg-black hover:text-white">
-                  Add to Bag
-                </button>
+                {/* Hidden button that appears on hover */}
+                <div className="absolute bottom-0 left-0 right-0 translate-y-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                  <button className="w-full bg-black py-3 text-[11px] uppercase tracking-[0.15em] text-white transition-all hover:bg-black/90">
+                    Add to Bag
+                  </button>
+                </div>
               </div>
             </article>
           ))}
