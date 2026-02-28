@@ -64,29 +64,55 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const product = productMap[params.slug] ?? productMap["velvet-oud"];
 
   return (
-    <section className="bg-base-2 py-16 md:py-24">
-      <div className="container-luxe grid gap-12 md:grid-cols-2 md:gap-16">
-        <div className="luxe-panel p-3">
-          <div className={`relative aspect-square bg-gradient-to-b ${product.tone}`}>
-            <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.08),transparent_45%)]" />
+    <section className="min-h-screen bg-white py-24 md:py-32">
+      <div className="container-luxe grid gap-20 md:grid-cols-2 md:gap-24">
+        <div className="luxe-panel overflow-hidden p-6">
+          <div className={`relative aspect-[3/4] bg-gradient-to-b ${product.tone} transition-transform duration-700 hover:scale-105`}>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+            <div className="absolute bottom-8 left-8">
+              <span className="text-xs font-medium uppercase tracking-[0.3em] text-white/90">EXCLUSIVE FRAGRANCE</span>
+            </div>
           </div>
         </div>
 
-        <div>
-          <p className="kicker">{product.family}</p>
-          <h1 className="mt-4 font-display text-5xl leading-[1.03] md:text-6xl">{product.name}</h1>
-          <p className="mt-6 max-w-xl text-sm uppercase leading-relaxed tracking-[0.14em] text-secondary/72">
+        <div className="flex flex-col justify-center">
+          <p className="kicker text-xs tracking-[0.3em] text-black/60">{product.family}</p>
+          <h1 className="mt-6 font-display text-6xl leading-[0.9] md:text-7xl lg:text-8xl">{product.name}</h1>
+          <p className="mt-8 max-w-xl text-base uppercase leading-relaxed tracking-[0.1em] text-black/70">
             {product.description}
           </p>
 
-          <p className="mt-8 text-[10px] uppercase tracking-[0.24em]">100ml / Extrait</p>
-          <p className="mt-3 text-[12px] uppercase tracking-[0.16em]">{product.price}</p>
+          <div className="mt-12 space-y-6">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-black/60">Size</p>
+              <p className="mt-2 text-sm font-medium tracking-[0.1em]">100ml / Extrait de Parfum</p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-black/60">Price</p>
+              <p className="mt-2 font-display text-3xl tracking-tight">{product.price}</p>
+            </div>
+          </div>
 
-          <div className="mt-8 flex flex-wrap gap-4">
-            <button className="btn-primary">Add To Bag</button>
-            <Link href="/collection" className="btn-outline">
+          <div className="mt-12 flex flex-wrap gap-6">
+            <button className="flex-1 bg-black px-10 py-5 text-xs uppercase tracking-[0.3em] text-white transition-all hover:bg-black/90">
+              Add To Bag
+            </button>
+            <Link 
+              href="/collection" 
+              className="flex-1 border-2 border-black px-10 py-5 text-center text-xs uppercase tracking-[0.3em] transition-all hover:bg-black hover:text-white"
+            >
               Back To Collection
             </Link>
+          </div>
+          
+          <div className="mt-16 border-t border-black/10 pt-12">
+            <p className="text-xs uppercase tracking-[0.3em] text-black/60">Product Details</p>
+            <ul className="mt-6 space-y-4 text-sm uppercase tracking-[0.1em] text-black/70">
+              <li>• Long-lasting 8-10 hour wear</li>
+              <li>• Crafted with natural essences</li>
+              <li>• Vegan & cruelty-free formula</li>
+              <li>• Includes luxury gift packaging</li>
+            </ul>
           </div>
         </div>
       </div>
