@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -12,13 +12,45 @@ const links = [
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [compact, setCompact] = useState(false);
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      if (currentY < 40) {
+        setCompact(false);
+      } else if (currentY > lastY) {
+        setCompact(true);
+      } else if (currentY < lastY) {
+        setCompact(false);
+      }
+      lastY = currentY;
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b border-black/10 bg-base/95 backdrop-blur-sm">
-      <div className="hidden border-b border-black/10 md:block">
+      <div
+        className={`hidden overflow-hidden border-b border-black/10 transition-all duration-300 md:block ${
+          compact ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
+        }`}
+      >
         <div className="container-luxe flex h-9 items-center justify-between text-[9px] uppercase tracking-[0.24em] text-secondary/60">
           <p>United States / English</p>
-          <p>Search</p>
+          <div className="flex items-center gap-6">
+            <button>Search</button>
+            <Link href="/account" className="inline-flex items-center gap-2">
+              <span className="inline-flex h-3 w-3 items-center justify-center rounded-full border border-secondary/60">
+                <span className="h-1 w-1 rounded-full bg-secondary/60" />
+              </span>
+              Account
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -38,7 +70,11 @@ export function SiteHeader() {
         </button>
       </div>
 
-      <div className="hidden border-t border-black/10 md:block">
+      <div
+        className={`hidden overflow-hidden border-t border-black/10 transition-all duration-300 md:block ${
+          compact ? "max-h-0 opacity-0" : "max-h-16 opacity-100"
+        }`}
+      >
         <nav className="container-luxe flex h-[50px] items-center justify-center gap-16">
           {links.map((link) => (
             <Link
@@ -68,6 +104,13 @@ export function SiteHeader() {
               {link.label}
             </Link>
           ))}
+          <Link
+            href="/account"
+            onClick={() => setMenuOpen(false)}
+            className="border-b border-black/10 py-4 text-xs uppercase tracking-[0.22em] text-secondary/80"
+          >
+            Account
+          </Link>
           <button className="border-b border-black/10 py-4 text-left text-xs uppercase tracking-[0.22em] text-secondary/80">
             Search
           </button>
