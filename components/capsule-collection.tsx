@@ -126,78 +126,65 @@ export function CapsuleCollection() {
   return (
     <section className="py-20 md:py-32">
       <div className="px-5 md:px-10">
-        <div className="mb-16 border-b border-black/10 pb-12 text-center">
-          <div className="mx-auto max-w-5xl">
-            <p className="kicker text-sm tracking-[0.3em]">THE FRAGRANCE CAPSULE</p>
-            <h2 className="mt-6 font-display text-5xl leading-[0.9] md:text-7xl lg:text-8xl">Explore The Collection</h2>
-            <p className="mx-auto mt-8 max-w-2xl text-sm uppercase leading-relaxed tracking-[0.1em] text-secondary/70">
-              A curated selection of signature scents designed for modern expression
-            </p>
+        <div className="mb-12 border-b border-black/10 pb-8 text-center">
+          <div className="mx-auto max-w-4xl">
+            <p className="kicker">Fragrances</p>
+            <h2 className="mt-4 font-display text-4xl leading-[0.95] md:text-6xl">Explore The Collection</h2>
           </div>
         </div>
 
-        <div className="mb-16 flex flex-wrap items-center justify-center gap-12 border-b border-black/10 pb-8">
+        <div className="mb-12 flex flex-wrap items-center justify-center gap-10 border-b border-black/10 pb-6">
           <button
             onClick={() => setActiveTab("all")}
-            className={`pb-3 text-xs uppercase tracking-[0.3em] transition-all duration-300 ${
+            className={`pb-2 text-[10px] uppercase tracking-[0.28em] transition ${
               activeTab === "all"
-                ? "border-b-2 border-black text-black"
-                : "text-black/50 hover:text-black"
+                ? "border-b border-secondary text-secondary"
+                : "text-secondary/55 hover:text-secondary"
             }`}
           >
-            All Fragrances
+            All
           </button>
           <button
             onClick={() => setActiveTab("men")}
-            className={`pb-3 text-xs uppercase tracking-[0.3em] transition-all duration-300 ${
+            className={`pb-2 text-[10px] uppercase tracking-[0.28em] transition ${
               activeTab === "men"
-                ? "border-b-2 border-black text-black"
-                : "text-black/50 hover:text-black"
+                ? "border-b border-secondary text-secondary"
+                : "text-secondary/55 hover:text-secondary"
             }`}
           >
-            For Him
+            For Men
           </button>
           <button
             onClick={() => setActiveTab("women")}
-            className={`pb-3 text-xs uppercase tracking-[0.3em] transition-all duration-300 ${
+            className={`pb-2 text-[10px] uppercase tracking-[0.28em] transition ${
               activeTab === "women"
-                ? "border-b-2 border-black text-black"
-                : "text-black/50 hover:text-black"
+                ? "border-b border-secondary text-secondary"
+                : "text-secondary/55 hover:text-secondary"
             }`}
           >
-            For Her
+            For Women
           </button>
         </div>
 
-        <div className="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {visibleProducts.map((product) => (
             <article key={product.slug} className="group">
-              <Link href={`/product/${product.slug}`} className="luxe-image block overflow-hidden">
-                <div className={`relative aspect-[3/4] bg-gradient-to-b ${product.tone} transition-transform duration-700 group-hover:scale-105`}>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/90">
-                        {product.category === 'men' ? 'FOR HIM' : 'FOR HER'}
-                      </span>
-                      <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-white/90">
-                        {product.size}
-                      </span>
-                    </div>
+              <Link href={`/product/${product.slug}`} className="luxe-image block">
+                <div className={`relative aspect-[7/8] bg-gradient-to-b ${product.tone}`}>
+                  <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.12),transparent_48%)] transition group-hover:bg-[linear-gradient(to_top,rgba(0,0,0,0.18),transparent_52%)]" />
+                  <div className="absolute bottom-4 left-4 text-[10px] uppercase tracking-[0.2em] text-white/0 transition group-hover:text-white/90">
+                    Discover
                   </div>
                 </div>
               </Link>
-              <div className="mt-8 text-center">
-                <p className="font-display text-3xl tracking-tight">{product.name}</p>
-                <p className="mt-3 text-xs uppercase tracking-[0.2em] text-black/60">
-                  {product.category === 'men' ? 'Men\'s Fragrance' : 'Women\'s Fragrance'}
+              <div className="mt-6 text-center">
+                <p className="font-display text-[36px] leading-none">{product.name}</p>
+                <p className="mt-3 text-[10px] uppercase tracking-[0.26em] text-secondary/60">
+                  {product.size}
                 </p>
-                <p className="mt-4 text-sm font-medium tracking-[0.1em]">
+                <p className="mt-4 text-[12px] uppercase tracking-[0.18em] transition group-hover:tracking-[0.22em]">
                   {product.price}
                 </p>
-                <button className="mt-6 w-full border border-black py-3 text-xs uppercase tracking-[0.2em] transition-all hover:bg-black hover:text-white">
-                  Add to Bag
-                </button>
               </div>
             </article>
           ))}
