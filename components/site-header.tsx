@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AccountIcon } from "./account-icon";
 
 const links = [
   { href: "/", label: "Home" },
@@ -44,12 +45,10 @@ export function SiteHeader() {
           <p>United States / English</p>
           <div className="flex items-center gap-6">
             <button>Search</button>
-            <Link href="/account" className="inline-flex items-center gap-2">
-              <span className="inline-flex h-3 w-3 items-center justify-center rounded-full border border-secondary/60">
-                <span className="h-1 w-1 rounded-full bg-secondary/60" />
-              </span>
-              Account
-            </Link>
+            <div className="flex items-center gap-2">
+              <AccountIcon />
+              <span className="hidden md:inline">Account</span>
+            </div>
           </div>
         </div>
       </div>
@@ -59,15 +58,20 @@ export function SiteHeader() {
         <Link href="/" className="font-display text-[21px] tracking-[0.2em] md:text-[29px]">
           NOIR ATELIER
         </Link>
-        <button className="hidden md:inline-block">Bag (0)</button>
-        <button
-          className="inline md:hidden"
-          onClick={() => setMenuOpen((state) => !state)}
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-        >
-          Menu
-        </button>
+        <div className="flex items-center gap-6">
+          <button className="hidden md:inline-block">Bag (0)</button>
+          <div className="hidden md:block">
+            <AccountIcon />
+          </div>
+          <button
+            className="inline md:hidden"
+            onClick={() => setMenuOpen((state) => !state)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+          >
+            Menu
+          </button>
+        </div>
       </div>
 
       <div
@@ -105,11 +109,32 @@ export function SiteHeader() {
             </Link>
           ))}
           <Link
-            href="/account"
+            href="/account/signin"
             onClick={() => setMenuOpen(false)}
             className="border-b border-black/10 py-4 text-xs uppercase tracking-[0.22em] text-secondary/80"
           >
-            Account
+            Sign In
+          </Link>
+          <Link
+            href="/account/signup"
+            onClick={() => setMenuOpen(false)}
+            className="border-b border-black/10 py-4 text-xs uppercase tracking-[0.22em] text-secondary/80"
+          >
+            Create Account
+          </Link>
+          <Link
+            href="/account/orders"
+            onClick={() => setMenuOpen(false)}
+            className="border-b border-black/10 py-4 text-xs uppercase tracking-[0.22em] text-secondary/80"
+          >
+            My Orders
+          </Link>
+          <Link
+            href="/account/wallet"
+            onClick={() => setMenuOpen(false)}
+            className="border-b border-black/10 py-4 text-xs uppercase tracking-[0.22em] text-secondary/80"
+          >
+            Wallet
           </Link>
           <button className="border-b border-black/10 py-4 text-left text-xs uppercase tracking-[0.22em] text-secondary/80">
             Search
