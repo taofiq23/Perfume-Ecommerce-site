@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { AccountIcon } from "./account-icon";
 
 const links = [
@@ -11,136 +12,203 @@ const links = [
   { href: "/product/velvet-oud", label: "Signature" }
 ];
 
+const menuSections = [
+  {
+    title: "Navigation",
+    links
+  }
+];
+
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [compact, setCompact] = useState(false);
+  const pathname = usePathname();
+  const lastYRef = useRef(0);
+  const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
-    let lastY = window.scrollY;
+    lastYRef.current = window.scrollY;
 
     const onScroll = () => {
-      const currentY = window.scrollY;
-      if (currentY < 40) {
-        setCompact(false);
-      } else if (currentY > lastY) {
-        setCompact(true);
-      } else if (currentY < lastY) {
-        setCompact(false);
+      if (frameRef.current !== null) {
+        return;
       }
-      lastY = currentY;
+
+      frameRef.current = window.requestAnimationFrame(() => {
+        frameRef.current = null;
+
+        const currentY = window.scrollY;
+        if (currentY < 40) {
+          setCompact(false);
+        } else if (currentY > lastYRef.current) {
+          setCompact(true);
+        } else if (currentY < lastYRef.current) {
+          setCompact(false);
+        }
+        lastYRef.current = currentY;
+      });
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
+    };
   }, []);
 
+  useEffect(() => {
+    lastYRef.current = window.scrollY;
+    setCompact(window.scrollY > 40);
+    setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-black/10 bg-base/95 backdrop-blur-sm">
-      <div
-        className={`hidden overflow-hidden border-b border-black/10 transition-all duration-300 md:block ${
-          compact ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
-        }`}
-      >
-        <div className="container-luxe flex h-9 items-center justify-between text-[9px] uppercase tracking-[0.24em] text-secondary/60">
-          <p>United States / English</p>
-          <div className="flex items-center gap-6">
-            <button>Search</button>
-            <button>Shipping</button>
+    <>
+      <header className="sticky top-0 z-50 border-b border-black/10 bg-base/95 backdrop-blur-sm">
+        <div
+          className={`hidden overflow-hidden border-b border-black/10 transition-all duration-300 md:block ${
+            compact ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
+          }`}
+        >
+          <div className="container-luxe flex h-9 items-center justify-between text-[9px] uppercase tracking-[0.24em] text-secondary/60">
+            <p>United States / English</p>
+            <div className="flex items-center gap-6">
+              <button>Search</button>
+              <button>Shipping</button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="container-luxe flex h-16 items-center justify-between text-[10px] uppercase tracking-[0.25em] md:h-[86px]">
-        <button className="hidden md:inline-block">Menu</button>
-        <Link href="/" className="font-display text-[21px] tracking-[0.2em] md:text-[29px]">
-          NOIR ATELIER
-        </Link>
-        <div className="flex items-center gap-6">
-          <button className="hidden md:inline-block">Bag (0)</button>
-          <div className="hidden md:block">
-            <AccountIcon />
-          </div>
-          <button
-            className="inline md:hidden"
-            onClick={() => setMenuOpen((state) => !state)}
-            aria-label="Toggle menu"
-            aria-expanded={menuOpen}
-          >
+        <div className="container-luxe flex h-16 items-center justify-between text-[10px] uppercase tracking-[0.25em] md:h-[86px]">
+          <button className="hidden md:inline-block" onClick={() => setMenuOpen(true)} aria-label="Open menu">
             Menu
           </button>
-        </div>
-      </div>
-
-      <div
-        className={`hidden overflow-hidden border-t border-black/10 transition-all duration-300 md:block ${
-          compact ? "max-h-0 opacity-0" : "max-h-16 opacity-100"
-        }`}
-      >
-        <nav className="container-luxe flex h-[50px] items-center justify-center gap-16">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-[10px] uppercase tracking-[0.29em] text-secondary/72 transition hover:text-secondary"
+          <Link href="/" className="font-display text-[21px] tracking-[0.2em] md:text-[29px]">
+            NOIR ATELIER
+          </Link>
+          <div className="flex items-center gap-6">
+            <button className="hidden items-center gap-2 md:inline-flex" aria-label="Shopping bag">
+              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+                <path d="M6 8h12l-1 12H7L6 8Z" stroke="currentColor" strokeWidth="1.4" />
+                <path d="M9 8V6a3 3 0 1 1 6 0v2" stroke="currentColor" strokeWidth="1.4" />
+              </svg>
+              <span>Bag (0)</span>
+            </button>
+            <div className="hidden md:block">
+              <AccountIcon />
+            </div>
+            <button
+              className="inline md:hidden"
+              onClick={() => setMenuOpen((state) => !state)}
+              aria-label="Toggle side menu"
+              aria-expanded={menuOpen}
             >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-      </div>
+              Menu
+            </button>
+          </div>
+        </div>
+
+        <div
+          className={`hidden overflow-hidden border-t border-black/10 transition-all duration-300 md:block ${
+            compact ? "max-h-0 opacity-0" : "max-h-16 opacity-100"
+          }`}
+        >
+          <nav className="container-luxe flex h-[50px] items-center justify-center gap-16">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-[10px] uppercase tracking-[0.29em] text-secondary/72 transition hover:text-secondary"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </header>
 
       <div
-        className={`overflow-hidden border-t border-black/10 bg-base transition-all duration-300 md:hidden ${
-          menuOpen ? "max-h-80" : "max-h-0"
-        }`}
+        className={`fixed inset-0 z-[70] transition-all duration-500 ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+        aria-hidden={!menuOpen}
       >
-        <div className="container-luxe flex flex-col py-5">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
+        <button
+          className={`absolute inset-0 bg-black/25 backdrop-blur-sm transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${menuOpen ? "opacity-100" : "opacity-0"}`}
+          onClick={() => setMenuOpen(false)}
+          aria-label="Close menu overlay"
+        />
+        <aside
+          className={`absolute left-0 top-0 h-full w-[92vw] max-w-[440px] overflow-y-auto border-r border-black/10 bg-[#f8f6f1] p-5 shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:p-7 ${
+            menuOpen ? "translate-x-0 opacity-100" : "-translate-x-full opacity-90"
+          }`}
+        >
+          <div className="mb-6 flex items-center justify-between border-b border-black/10 pb-4">
+            <p className="font-display text-xl tracking-[0.06em]">NOIR ATELIER</p>
+            <button
               onClick={() => setMenuOpen(false)}
-              className="border-b border-black/10 py-4 text-xs uppercase tracking-[0.22em] text-secondary/80"
+              className="inline-flex h-9 w-9 items-center justify-center border border-black/20 text-black/70 hover:border-black hover:text-black"
+              aria-label="Close side menu"
             >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/account/signin"
-            onClick={() => setMenuOpen(false)}
-            className="border-b border-black/10 py-4 text-xs uppercase tracking-[0.22em] text-secondary/80"
-          >
-            Sign In
-          </Link>
-          <Link
-            href="/account/signup"
-            onClick={() => setMenuOpen(false)}
-            className="border-b border-black/10 py-4 text-xs uppercase tracking-[0.22em] text-secondary/80"
-          >
-            Create Account
-          </Link>
-          <Link
-            href="/account/orders"
-            onClick={() => setMenuOpen(false)}
-            className="border-b border-black/10 py-4 text-xs uppercase tracking-[0.22em] text-secondary/80"
-          >
-            My Orders
-          </Link>
-          <Link
-            href="/account/wallet"
-            onClick={() => setMenuOpen(false)}
-            className="border-b border-black/10 py-4 text-xs uppercase tracking-[0.22em] text-secondary/80"
-          >
-            Wallet
-          </Link>
-          <button className="border-b border-black/10 py-4 text-left text-xs uppercase tracking-[0.22em] text-secondary/80">
-            Search
-          </button>
-          <button className="py-4 text-left text-xs uppercase tracking-[0.22em] text-secondary/80">
-            Bag (0)
-          </button>
-        </div>
+              <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" aria-hidden="true">
+                <path d="M3 3L13 13M13 3L3 13" stroke="currentColor" strokeWidth="1.4" />
+              </svg>
+            </button>
+          </div>
+
+          <div className="grid gap-7">
+            {menuSections.map((section) => (
+              <section key={section.title}>
+                <h3 className="text-[10px] uppercase tracking-[0.22em] text-black/50">{section.title}</h3>
+                <div className="mt-3 flex flex-col">
+                  {section.links.map((link, linkIndex) => (
+                    <Link
+                      key={`${section.title}-${link.label}`}
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className={`group flex items-center justify-between border-b border-black/10 py-3 text-sm uppercase tracking-[0.12em] text-black/80 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-black ${
+                        menuOpen ? "translate-x-0 opacity-100" : "-translate-x-2 opacity-0"
+                      }`}
+                      style={{ transitionDelay: menuOpen ? `${70 + linkIndex * 35}ms` : "0ms" }}
+                    >
+                      <span>{link.label}</span>
+                      <span className="translate-x-0 text-black/40 transition-transform duration-200 group-hover:translate-x-1">-&gt;</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+
+          <div className="mt-8 border-t border-black/10 pt-5">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-black/50">Quick Access</p>
+            <div className="mt-3 grid gap-2">
+              <Link
+                href="/account/signin"
+                onClick={() => setMenuOpen(false)}
+                className="text-sm uppercase tracking-[0.12em] text-black/80 hover:text-black"
+              >
+                Sign In
+              </Link>
+              <Link
+                href="/account/signup"
+                onClick={() => setMenuOpen(false)}
+                className="text-sm uppercase tracking-[0.12em] text-black/80 hover:text-black"
+              >
+                Create Account
+              </Link>
+            </div>
+          </div>
+        </aside>
       </div>
-    </header>
+    </>
   );
 }

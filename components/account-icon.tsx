@@ -1,17 +1,33 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export function AccountIcon() {
   const [isOpen, setIsOpen] = useState(false);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openMenu = () => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+    setIsOpen(true);
+  };
+
+  const closeMenu = () => {
+    closeTimerRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 120);
+  };
 
   return (
-    <div className="relative">
+    <div className="relative" onMouseEnter={openMenu} onMouseLeave={closeMenu}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center justify-center"
         aria-label="Account menu"
+        aria-expanded={isOpen}
       >
         <div className="relative h-6 w-6">
           <svg
