@@ -80,7 +80,7 @@ export function SiteHeader() {
             compact ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
           }`}
         >
-          <div className="container-luxe flex h-9 items-center justify-between text-[9px] uppercase tracking-[0.24em] text-secondary/60">
+          <div className="container-luxe flex h-9 items-center justify-between text-[11px] uppercase tracking-[0.2em] text-secondary/60">
             <p>United States / English</p>
             <div className="flex items-center gap-6">
               <button>Search</button>
@@ -89,7 +89,7 @@ export function SiteHeader() {
           </div>
         </div>
 
-        <div className="container-luxe flex h-16 items-center justify-between text-[10px] uppercase tracking-[0.25em] md:h-[86px]">
+        <div className="container-luxe flex h-16 items-center justify-between text-xs uppercase tracking-[0.22em] md:h-[86px]">
           <button className="hidden md:inline-block" onClick={() => setMenuOpen(true)} aria-label="Open menu">
             Menu
           </button>
@@ -128,7 +128,7 @@ export function SiteHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[10px] uppercase tracking-[0.29em] text-secondary/72 transition hover:text-secondary"
+                className="text-xs uppercase tracking-[0.24em] text-secondary/72 transition hover:text-secondary"
               >
                 {link.label}
               </Link>
@@ -167,7 +167,7 @@ export function SiteHeader() {
           <div className="grid gap-7">
             {menuSections.map((section) => (
               <section key={section.title}>
-                <h3 className="text-[10px] uppercase tracking-[0.22em] text-black/50">{section.title}</h3>
+                <h3 className="text-xs uppercase tracking-[0.18em] text-black/50">{section.title}</h3>
                 <div className="mt-3 flex flex-col">
                   {section.links.map((link, linkIndex) => (
                     <Link
@@ -189,7 +189,7 @@ export function SiteHeader() {
           </div>
 
           <div className="mt-8 border-t border-black/10 pt-5">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-black/50">Quick Access</p>
+            <p className="text-xs uppercase tracking-[0.16em] text-black/50">Quick Access</p>
             <div className="mt-3 grid gap-2">
               <Link
                 href="/account/signin"

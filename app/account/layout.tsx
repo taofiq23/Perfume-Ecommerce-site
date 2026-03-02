@@ -1,55 +1,63 @@
+"use client";
+
 import { ReactNode } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const accountLinks = [
-  { href: "/account/orders", label: "My Orders" },
+  { href: "/account", label: "Overview" },
+  { href: "/account/orders", label: "Orders" },
+  { href: "/account/wishlist", label: "Wishlist" },
+  { href: "/account/address-book", label: "Address Book" },
+  { href: "/account/payment", label: "Payment" },
   { href: "/account/wallet", label: "Wallet" },
-  { href: "/account/settings", label: "Settings" },
+  { href: "/account/settings", label: "Settings" }
 ];
 
 export default function AccountLayout({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+
   return (
-    <div className="min-h-screen bg-white">
-      <div className="border-b border-black/10">
-        <div className="container-luxe py-8">
-          <h1 className="font-display text-4xl md:text-5xl">Account</h1>
-          <p className="mt-2 text-sm uppercase tracking-[0.1em] text-black/50">
-            Manage your account and preferences
+    <div className="account-shell">
+      <div className="border-b border-black/10 bg-white/55">
+        <div className="container-luxe py-10 md:py-12">
+          <p className="kicker">Client Space</p>
+          <h1 className="mt-4 font-display text-5xl leading-[0.95] md:text-6xl">Account</h1>
+          <p className="mt-4 max-w-3xl text-sm uppercase tracking-[0.12em] text-black/55">
+            Orders, saved preferences, payment methods, and profile settings in one place.
           </p>
         </div>
       </div>
-      <div className="container-luxe py-12">
-        <div className="grid gap-8 md:grid-cols-4">
-          <div className="md:col-span-1">
-            <nav className="sticky top-24 space-y-2">
-              {accountLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="block border-l-2 border-transparent py-2 pl-4 text-sm uppercase tracking-[0.1em] text-black/60 hover:border-black hover:text-black"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="pt-4 mt-4 border-t border-black/10">
-                <Link
-                  href="/account/signin"
-                  className="block py-2 pl-4 text-sm uppercase tracking-[0.1em] text-black/60 hover:text-black"
-                >
-                  Sign In
-                </Link>
-                <Link
-                  href="/account/signup"
-                  className="block py-2 pl-4 text-sm uppercase tracking-[0.1em] text-black/60 hover:text-black"
-                >
-                  Create Account
-                </Link>
+
+      <div className="container-luxe py-8 md:py-12">
+        <div className="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)]">
+          <aside>
+            <nav className="account-panel sticky top-24 overflow-x-auto p-2">
+              <div className="flex gap-2 lg:flex-col">
+                {accountLinks.map((link) => {
+                  const active =
+                    link.href === "/account"
+                      ? pathname === "/account"
+                      : pathname === link.href || pathname.startsWith(`${link.href}/`);
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`shrink-0 rounded-sm border px-4 py-2.5 text-xs uppercase tracking-[0.14em] transition ${
+                        active
+                          ? "border-black bg-black text-white"
+                          : "border-black/10 text-black/65 hover:border-black/30 hover:text-black"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
               </div>
             </nav>
-          </div>
-          <div className="md:col-span-3">
-            {children}
-          </div>
+          </aside>
+
+          <div className="min-w-0">{children}</div>
         </div>
       </div>
     </div>

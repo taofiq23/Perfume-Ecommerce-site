@@ -1,171 +1,174 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+
+type SettingsForm = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  newsletter: boolean;
+  marketing: boolean;
+};
+
+const initialForm: SettingsForm = {
+  firstName: "Alex",
+  lastName: "Morgan",
+  email: "alex@example.com",
+  phone: "+1 (555) 123-4567",
+  newsletter: true,
+  marketing: false
+};
 
 export default function SettingsPage() {
-  const [formData, setFormData] = useState({
-    firstName: "Alex",
-    lastName: "Morgan",
-    email: "alex@example.com",
-    phone: "+1 (555) 123-4567",
-    newsletter: true,
-    marketing: false,
-  });
+  const [formData, setFormData] = useState<SettingsForm>(initialForm);
+  const [saved, setSaved] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = event.target;
+    setFormData((current) => ({
+      ...current,
+      [name]: type === "checkbox" ? checked : value
+    }));
+    setSaved(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle save logic
-    console.log("Settings saved:", formData);
-    alert("Settings saved successfully!");
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSaved(true);
+  };
+
+  const handleCancel = () => {
+    setFormData(initialForm);
+    setSaved(false);
   };
 
   return (
-    <section className="min-h-screen bg-white py-24 md:py-32">
-      <div className="container-luxe max-w-2xl">
-        <div className="mb-12">
-          <h1 className="font-display text-4xl leading-[0.95] md:text-5xl">Account Settings</h1>
-          <p className="mt-4 text-sm uppercase tracking-[0.1em] text-black/50">
-            Manage your personal information and preferences
-          </p>
+    <section className="space-y-6">
+      <div className="account-panel p-6 md:p-8">
+        <p className="kicker">Profile</p>
+        <h2 className="mt-4 font-display text-4xl leading-[0.95] md:text-5xl">Account Settings</h2>
+        <p className="account-subtitle">Update personal details, communication preferences, and security settings.</p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="account-panel p-6 md:p-8">
+          <h3 className="text-xs uppercase tracking-[0.18em] text-black/55">Personal Information</h3>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <div>
+              <label htmlFor="firstName" className="account-label">
+                First Name
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                className="account-input"
+              />
+            </div>
+            <div>
+              <label htmlFor="lastName" className="account-label">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                className="account-input"
+              />
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <label htmlFor="email" className="account-label">
+              Email Address
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="account-input"
+            />
+          </div>
+
+          <div className="mt-4">
+            <label htmlFor="phone" className="account-label">
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="account-input"
+            />
+          </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
-          <div className="border-b border-black/10 pb-8">
-            <h2 className="mb-6 text-sm uppercase tracking-[0.2em] text-black/60">Personal Information</h2>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="firstName" className="mb-2 block text-xs uppercase tracking-[0.2em] text-black/60">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  className="w-full border border-black/20 px-4 py-3 text-sm focus:border-black focus:outline-none"
-                />
-              </div>
-              <div>
-                <label htmlFor="lastName" className="mb-2 block text-xs uppercase tracking-[0.2em] text-black/60">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  className="w-full border border-black/20 px-4 py-3 text-sm focus:border-black focus:outline-none"
-                />
-              </div>
-            </div>
-            <div className="mt-4">
-              <label htmlFor="email" className="mb-2 block text-xs uppercase tracking-[0.2em] text-black/60">
-                Email Address
-              </label>
+        <div className="account-panel p-6 md:p-8">
+          <h3 className="text-xs uppercase tracking-[0.18em] text-black/55">Communication Preferences</h3>
+          <div className="mt-5 space-y-4">
+            <label className="flex items-start gap-3 text-sm text-black/75">
               <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
+                type="checkbox"
+                name="newsletter"
+                checked={formData.newsletter}
                 onChange={handleChange}
-                className="w-full border border-black/20 px-4 py-3 text-sm focus:border-black focus:outline-none"
+                className="mt-0.5"
               />
-            </div>
-            <div className="mt-4">
-              <label htmlFor="phone" className="mb-2 block text-xs uppercase tracking-[0.2em] text-black/60">
-                Phone Number
-              </label>
+              <span>Receive newsletter updates for launches, stories, and limited capsule releases.</span>
+            </label>
+            <label className="flex items-start gap-3 text-sm text-black/75">
               <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
+                type="checkbox"
+                name="marketing"
+                checked={formData.marketing}
                 onChange={handleChange}
-                className="w-full border border-black/20 px-4 py-3 text-sm focus:border-black focus:outline-none"
+                className="mt-0.5"
               />
-            </div>
+              <span>Receive product recommendations and promotional messages.</span>
+            </label>
           </div>
+        </div>
 
-          <div className="border-b border-black/10 pb-8">
-            <h2 className="mb-6 text-sm uppercase tracking-[0.2em] text-black/60">Communication Preferences</h2>
-            <div className="space-y-4">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="newsletter"
-                  checked={formData.newsletter}
-                  onChange={handleChange}
-                  className="mr-3"
-                />
-                <span className="text-sm">Subscribe to newsletter for exclusive offers and updates</span>
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="marketing"
-                  checked={formData.marketing}
-                  onChange={handleChange}
-                  className="mr-3"
-                />
-                <span className="text-sm">Receive marketing communications about new products</span>
-              </label>
-            </div>
-          </div>
-
-          <div className="border-b border-black/10 pb-8">
-            <h2 className="mb-6 text-sm uppercase tracking-[0.2em] text-black/60">Security</h2>
-            <div className="space-y-4">
-              <button
-                type="button"
-                className="border border-black px-6 py-3 text-xs uppercase tracking-[0.2em] hover:bg-black hover:text-white"
-              >
-                Change Password
-              </button>
-              <button
-                type="button"
-                className="ml-4 border border-black/20 px-6 py-3 text-xs uppercase tracking-[0.2em] hover:border-black"
-              >
-                Two-Factor Authentication
-              </button>
-            </div>
-          </div>
-
-          <div className="flex justify-between">
-            <button
-              type="button"
-              className="border border-black/20 px-8 py-3 text-xs uppercase tracking-[0.2em] hover:border-black"
-            >
-              Cancel
+        <div className="account-panel p-6 md:p-8">
+          <h3 className="text-xs uppercase tracking-[0.18em] text-black/55">Security</h3>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            <button type="button" className="account-btn-primary w-full">
+              Change Password
             </button>
-            <button
-              type="submit"
-              className="bg-black px-8 py-3 text-xs uppercase tracking-[0.2em] text-white hover:bg-black/90"
-            >
-              Save Changes
+            <button type="button" className="account-btn-outline w-full">
+              Two-Factor Authentication
             </button>
           </div>
-        </form>
+        </div>
 
-        <div className="mt-12 border-t border-black/10 pt-12">
-          <h2 className="mb-6 text-sm uppercase tracking-[0.2em] text-black/60">Account Actions</h2>
-          <div className="space-y-4">
-            <button className="text-left text-sm text-red-600 hover:underline">
-              Deactivate Account
-            </button>
-            <button className="text-left text-sm text-red-600 hover:underline">
-              Delete Account Permanently
-            </button>
-          </div>
+        <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
+          <button type="button" onClick={handleCancel} className="account-btn-outline w-full sm:w-auto">
+            Cancel
+          </button>
+          <button type="submit" className="account-btn-primary w-full sm:w-auto">
+            Save Changes
+          </button>
+        </div>
+
+        {saved ? (
+          <p className="account-panel p-4 text-sm text-black/75">Your settings were saved successfully.</p>
+        ) : null}
+      </form>
+
+      <div className="account-panel p-6 md:p-8">
+        <h3 className="text-xs uppercase tracking-[0.18em] text-black/55">Account Actions</h3>
+        <div className="mt-4 flex flex-col gap-3 text-sm">
+          <button className="text-left text-red-600 hover:underline">Deactivate Account</button>
+          <button className="text-left text-red-600 hover:underline">Delete Account Permanently</button>
         </div>
       </div>
     </section>

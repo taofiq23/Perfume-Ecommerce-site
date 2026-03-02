@@ -1,44 +1,56 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
+
+type SignUpForm = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
+const initialForm: SignUpForm = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: ""
+};
 
 export default function SignUpPage() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [formData, setFormData] = useState<SignUpForm>(initialForm);
+  const [message, setMessage] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setFormData((current) => ({
+      ...current,
+      [event.target.id]: event.target.value
+    }));
+    setMessage("");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle sign up logic
-    console.log("Sign up attempt:", formData);
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      setMessage("Passwords do not match.");
+      return;
+    }
+    setMessage("Demo mode: your account request was captured.");
   };
 
   return (
-    <section className="min-h-screen bg-white py-24 md:py-32">
-      <div className="container-luxe max-w-md">
-        <div className="mb-12 text-center">
-          <h1 className="font-display text-4xl leading-[0.95] md:text-5xl">Create Account</h1>
-          <p className="mt-4 text-sm uppercase tracking-[0.1em] text-black/50">
-            Join our community for exclusive benefits
-          </p>
-        </div>
+    <section className="mx-auto w-full max-w-2xl">
+      <div className="account-panel p-6 md:p-8">
+        <p className="kicker">Authentication</p>
+        <h2 className="mt-4 font-display text-4xl leading-[0.95] md:text-5xl">Create Account</h2>
+        <p className="account-subtitle">Build your profile to save favorites, track orders, and speed up checkout.</p>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="firstName" className="mb-2 block text-xs uppercase tracking-[0.2em] text-black/60">
+              <label htmlFor="firstName" className="account-label">
                 First Name
               </label>
               <input
@@ -46,12 +58,12 @@ export default function SignUpPage() {
                 id="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
-                className="w-full border border-black/20 px-4 py-3 text-sm focus:border-black focus:outline-none"
+                className="account-input"
                 required
               />
             </div>
             <div>
-              <label htmlFor="lastName" className="mb-2 block text-xs uppercase tracking-[0.2em] text-black/60">
+              <label htmlFor="lastName" className="account-label">
                 Last Name
               </label>
               <input
@@ -59,14 +71,14 @@ export default function SignUpPage() {
                 id="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
-                className="w-full border border-black/20 px-4 py-3 text-sm focus:border-black focus:outline-none"
+                className="account-input"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="email" className="mb-2 block text-xs uppercase tracking-[0.2em] text-black/60">
+            <label htmlFor="email" className="account-label">
               Email Address
             </label>
             <input
@@ -74,84 +86,60 @@ export default function SignUpPage() {
               id="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full border border-black/20 px-4 py-3 text-sm focus:border-black focus:outline-none"
+              className="account-input"
               required
             />
           </div>
 
-          <div>
-            <label htmlFor="password" className="mb-2 block text-xs uppercase tracking-[0.2em] text-black/60">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full border border-black/20 px-4 py-3 text-sm focus:border-black focus:outline-none"
-              required
-            />
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label htmlFor="password" className="account-label">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="account-input"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="confirmPassword" className="account-label">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="account-input"
+                required
+              />
+            </div>
           </div>
 
-          <div>
-            <label htmlFor="confirmPassword" className="mb-2 block text-xs uppercase tracking-[0.2em] text-black/60">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className="w-full border border-black/20 px-4 py-3 text-sm focus:border-black focus:outline-none"
-              required
-            />
-          </div>
+          <label className="inline-flex items-start gap-2 text-xs uppercase tracking-[0.12em] text-black/60">
+            <input type="checkbox" className="mt-0.5" />
+            <span>Send me launch updates, offers, and fragrance stories.</span>
+          </label>
 
-          <div className="flex items-center">
-            <input type="checkbox" id="newsletter" className="mr-2" />
-            <label htmlFor="newsletter" className="text-xs uppercase tracking-[0.1em] text-black/60">
-              Subscribe to our newsletter for exclusive offers
-            </label>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-black py-4 text-xs uppercase tracking-[0.3em] text-white transition-all hover:bg-black/90"
-          >
+          <button type="submit" className="account-btn-primary w-full">
             Create Account
           </button>
         </form>
 
-        <div className="mt-8 text-center">
-          <p className="text-xs uppercase tracking-[0.1em] text-black/50">
-            Already have an account?{" "}
-            <Link href="/account/signin" className="font-medium text-black hover:underline">
-              Sign in
-            </Link>
-          </p>
-        </div>
+        {message ? (
+          <p className="mt-5 border border-black/10 bg-black/[0.03] p-3 text-sm text-black/75">{message}</p>
+        ) : null}
 
-        <div className="mt-12 border-t border-black/10 pt-12">
-          <h2 className="mb-6 text-center text-sm uppercase tracking-[0.2em] text-black/60">Account Benefits</h2>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="border border-black/10 p-4 text-center">
-              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-black/5">
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                </svg>
-              </div>
-              <p className="text-xs uppercase tracking-[0.1em]">Order Tracking</p>
-            </div>
-            <div className="border border-black/10 p-4 text-center">
-              <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-black/5">
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <p className="text-xs uppercase tracking-[0.1em]">Wallet</p>
-            </div>
-          </div>
-        </div>
+        <p className="mt-7 text-xs uppercase tracking-[0.12em] text-black/55">
+          Already have an account?{" "}
+          <Link href="/account/signin" className="text-black hover:underline">
+            Sign In
+          </Link>
+        </p>
       </div>
     </section>
   );

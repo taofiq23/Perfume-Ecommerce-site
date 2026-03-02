@@ -24,10 +24,10 @@ export default function CollectionPage() {
             <article key={item.slug} className="group relative">
               <div className="relative overflow-hidden">
                 <Link href={`/product/${item.slug}`} className="luxe-image block">
-                  <div className="aspect-[3/4] bg-gradient-to-b from-[#ece1d0] to-[#b3925c] transition-all duration-500 group-hover:scale-105">
+                  <div className="aspect-[3/4] bg-gradient-to-b from-[#ece1d0] to-[#b3925c] transition-all duration-500 md:group-hover:scale-105">
                     {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/40">
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                    <div className="absolute inset-0 bg-black/15 transition-all duration-300 md:bg-black/0 md:group-hover:bg-black/40">
+                      <div className="absolute inset-0 hidden items-center justify-center opacity-0 transition-all duration-300 md:flex md:group-hover:opacity-100">
                         <div className="text-center p-6">
                           <div className="mb-4">
                             <span className="inline-block border border-white/50 px-4 py-2 text-[11px] uppercase tracking-[0.2em] text-white">
@@ -39,6 +39,9 @@ export default function CollectionPage() {
                           </p>
                         </div>
                       </div>
+                      <p className="absolute bottom-4 left-4 text-[11px] uppercase tracking-[0.14em] text-white/95 md:hidden">
+                        {item.family}
+                      </p>
                     </div>
                   </div>
                 </Link>
@@ -47,11 +50,22 @@ export default function CollectionPage() {
                   <p className="mt-2 text-xs uppercase tracking-[0.2em] text-black/50">{item.family}</p>
                   <p className="mt-3 text-sm font-medium tracking-[0.1em]">{item.price}</p>
                 </div>
-                {/* Hidden button that appears on hover */}
-                <div className="absolute bottom-0 left-0 right-0 translate-y-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                  <button className="w-full bg-black py-3 text-xs uppercase tracking-[0.2em] text-white transition-all hover:bg-black/90">
+                <div className="mt-4 md:hidden">
+                  <Link
+                    href={`/product/${item.slug}`}
+                    className="block w-full bg-black py-3 text-center text-xs uppercase tracking-[0.2em] text-white"
+                  >
                     View Details
-                  </button>
+                  </Link>
+                </div>
+                {/* Hidden button that appears on hover */}
+                <div className="absolute bottom-0 left-0 right-0 hidden translate-y-full opacity-0 transition-all duration-300 md:block md:group-hover:translate-y-0 md:group-hover:opacity-100">
+                  <Link
+                    href={`/product/${item.slug}`}
+                    className="block w-full bg-black py-3 text-center text-xs uppercase tracking-[0.2em] text-white transition-all hover:bg-black/90"
+                  >
+                    View Details
+                  </Link>
                 </div>
               </div>
             </article>

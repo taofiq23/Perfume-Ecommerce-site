@@ -174,24 +174,24 @@ export function CapsuleCollection() {
             <article key={product.slug} className="group relative">
               <div className="relative overflow-hidden">
                 <Link href={`/product/${product.slug}`} className="luxe-image block">
-                  <div className={`relative aspect-[4/5] bg-gradient-to-b ${product.tone} transition-all duration-500 group-hover:scale-105`}>
+                  <div className={`relative aspect-[4/5] bg-gradient-to-b ${product.tone} transition-all duration-500 md:group-hover:scale-105`}>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-white/90">
+                        <span className="text-xs font-medium uppercase tracking-[0.15em] text-white/90">
                           {product.category === 'men' ? 'HIM' : 'HER'}
                         </span>
-                        <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-white/90">
+                        <span className="text-xs font-medium uppercase tracking-[0.15em] text-white/90">
                           {product.size}
                         </span>
                       </div>
                     </div>
                     {/* Hover overlay with details */}
-                    <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/40">
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+                    <div className="absolute inset-0 bg-black/15 transition-all duration-300 md:bg-black/0 md:group-hover:bg-black/40">
+                      <div className="absolute inset-0 hidden items-center justify-center opacity-0 transition-all duration-300 md:flex md:group-hover:opacity-100">
                         <div className="text-center p-6">
                           <div className="mb-4">
-                            <span className="inline-block border border-white/50 px-4 py-2 text-[11px] uppercase tracking-[0.2em] text-white">
+                            <span className="inline-block border border-white/50 px-4 py-2 text-xs uppercase tracking-[0.2em] text-white">
                               Quick View
                             </span>
                           </div>
@@ -200,22 +200,33 @@ export function CapsuleCollection() {
                           </p>
                         </div>
                       </div>
+                      <p className="absolute bottom-4 left-4 text-xs uppercase tracking-[0.14em] text-white/95 md:hidden">
+                        {product.category === "men" ? "Men's Fragrance" : "Women's Fragrance"}
+                      </p>
                     </div>
                   </div>
                 </Link>
                 {/* Always visible product info */}
                 <div className="mt-4 text-center">
                   <p className="font-display text-xl tracking-tight">{product.name}</p>
-                  <p className="mt-1 text-[11px] uppercase tracking-[0.15em] text-black/50">
+                  <p className="mt-1 text-xs uppercase tracking-[0.15em] text-black/50">
                     {product.category === 'men' ? 'Men\'s' : 'Women\'s'}
                   </p>
                   <p className="mt-2 text-sm font-medium tracking-[0.08em]">
                     {product.price}
                   </p>
                 </div>
+                <div className="mt-4 md:hidden">
+                  <Link
+                    href={`/product/${product.slug}`}
+                    className="block w-full bg-black py-3 text-center text-xs uppercase tracking-[0.15em] text-white"
+                  >
+                    Add to Bag
+                  </Link>
+                </div>
                 {/* Hidden button that appears on hover */}
-                <div className="absolute bottom-0 left-0 right-0 translate-y-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                  <button className="w-full bg-black py-3 text-[11px] uppercase tracking-[0.15em] text-white transition-all hover:bg-black/90">
+                <div className="absolute bottom-0 left-0 right-0 hidden translate-y-full opacity-0 transition-all duration-300 md:block md:group-hover:translate-y-0 md:group-hover:opacity-100">
+                  <button className="w-full bg-black py-3 text-xs uppercase tracking-[0.15em] text-white transition-all hover:bg-black/90">
                     Add to Bag
                   </button>
                 </div>
