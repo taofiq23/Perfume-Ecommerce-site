@@ -2,13 +2,13 @@ export function CapsulePageFlow() {
   return (
     <>
       <section className="relative border-b border-black/10">
-        <div className="relative h-[74vh] min-h-[520px] w-full md:h-[78vh] md:min-h-[580px]">
+        <div className="relative h-[62vh] min-h-[450px] w-full md:h-[68vh] md:min-h-[530px]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,#6d6354_0%,transparent_42%),linear-gradient(135deg,#2e2a24_0%,#141311_40%,#5c4f3a_100%)]" />
           <div className="hero-overlay absolute inset-0" />
         </div>
-        <div className="absolute bottom-8 left-0 right-0 md:bottom-12">
+        <div className="absolute bottom-6 left-0 right-0 md:bottom-10">
           <div className="container-luxe">
-            <p className="kicker text-base/82">Noir Atelier Capsule</p>
+            <p className="kicker text-base/82">Yubi Essence Capsule</p>
             <h1 className="mt-4 max-w-4xl font-display text-[40px] leading-[0.94] text-base md:text-[86px]">
               The Guilty<br className="hidden md:block" />Signature
             </h1>

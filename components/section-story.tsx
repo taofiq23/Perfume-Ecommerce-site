@@ -8,7 +8,7 @@ export function SectionStory() {
             Crafted for identities that speak before words.
           </h2>
           <p className="mt-6 max-w-xl leading-relaxed text-base/80">
-            NOIR ATELIER blends French perfumery discipline with contemporary
+            Yubi Essence blends French perfumery discipline with contemporary
             minimalism. Every bottle is built like an editorial object: precise,
             elegant, unforgettable.
           </p>

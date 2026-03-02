@@ -46,7 +46,10 @@ export function SiteFooter() {
       <div className="container-luxe py-12 md:py-16">
         <div className="grid gap-10 border-b border-base-2/20 pb-10 md:grid-cols-[1.2fr_1fr_1fr_1fr_1fr] md:gap-8">
           <div>
-            <p className="font-display text-2xl tracking-[0.2em]">NOIR ATELIER</p>
+            <p className="font-display text-2xl">
+              <span className="tracking-[0.24em]">YUBI</span>
+              <span className="ml-2 tracking-[0.18em] text-accent/90">ESSENCE</span>
+            </p>
             <p className="mt-4 max-w-xs text-xs uppercase leading-relaxed tracking-[0.12em] text-base-2/70">
               Modern fragrance house built with editorial aesthetics, precise perfumery, and luxury service.
             </p>
@@ -71,7 +74,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-6 flex flex-col gap-3 text-xs uppercase tracking-[0.12em] text-base-2/60 md:flex-row md:items-center md:justify-between">
-          <p>Copyright {year} Noir Atelier. All rights reserved.</p>
+          <p>Copyright {year} Yubi Essence. All rights reserved.</p>
           <p>Secure Checkout | Major Cards Accepted</p>
         </div>
       </div>

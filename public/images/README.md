@@ -1,4 +1,4 @@
-# Image Drop Zone (NOIR ATELIER)
+# Image Drop Zone (YUBI ESSENCE)
 
 Put your final images in this folder using the exact filenames below.
 

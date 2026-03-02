@@ -21,7 +21,7 @@ export function CapsuleMediaBreaks() {
 
       <section className="border-b border-black/10 py-24 md:py-36">
         <div className="editorial-center max-w-3xl">
-          <p className="kicker">Noir Atelier Manifesto</p>
+          <p className="kicker">Yubi Essence Manifesto</p>
           <h2 className="section-title mt-6">
             Two Signatures. One Magnetic Identity.
           </h2>

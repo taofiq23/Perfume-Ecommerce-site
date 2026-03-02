@@ -89,12 +89,13 @@ export function SiteHeader() {
           </div>
         </div>
 
-        <div className="container-luxe flex h-16 items-center justify-between text-xs uppercase tracking-[0.22em] md:h-[86px]">
+        <div className="container-luxe flex h-16 items-center justify-between text-xs uppercase tracking-[0.2em] md:h-[86px]">
           <button className="hidden md:inline-block" onClick={() => setMenuOpen(true)} aria-label="Open menu">
             Menu
           </button>
-          <Link href="/" className="font-display text-[21px] tracking-[0.2em] md:text-[29px]">
-            NOIR ATELIER
+          <Link href="/" className="font-display text-[22px] font-semibold text-black md:text-[30px]">
+            <span className="tracking-[0.2em]">YUBI</span>
+            <span className="ml-2 tracking-[0.14em]">ESSENCE</span>
           </Link>
           <div className="flex items-center gap-6">
             <button className="hidden items-center gap-2 md:inline-flex" aria-label="Shopping bag">
@@ -152,7 +153,10 @@ export function SiteHeader() {
           }`}
         >
           <div className="mb-6 flex items-center justify-between border-b border-black/10 pb-4">
-            <p className="font-display text-xl tracking-[0.06em]">NOIR ATELIER</p>
+            <p className="font-display text-xl font-semibold text-black">
+              <span className="tracking-[0.22em]">YUBI</span>
+              <span className="ml-2 tracking-[0.16em]">ESSENCE</span>
+            </p>
             <button
               onClick={() => setMenuOpen(false)}
               className="inline-flex h-9 w-9 items-center justify-center border border-black/20 text-black/70 hover:border-black hover:text-black"

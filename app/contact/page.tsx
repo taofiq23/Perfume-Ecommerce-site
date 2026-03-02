@@ -10,7 +10,7 @@ export default function ContactPage() {
       <div className="mt-10 grid gap-6 md:grid-cols-3">
         <article className="border border-black/10 p-6">
           <h2 className="text-xs uppercase tracking-[0.2em] text-secondary/70">Email</h2>
-          <p className="mt-3 text-sm text-secondary/80">support@noiratelier.com</p>
+          <p className="mt-3 text-sm text-secondary/80">support@yubiessence.com</p>
         </article>
         <article className="border border-black/10 p-6">
           <h2 className="text-xs uppercase tracking-[0.2em] text-secondary/70">Phone</h2>
@@ -25,7 +25,7 @@ export default function ContactPage() {
       <div className="mt-10 border border-black/10 p-6">
         <h2 className="text-xs uppercase tracking-[0.2em] text-secondary/70">Head Office</h2>
         <p className="mt-3 text-sm leading-relaxed text-secondary/80">
-          NOIR ATELIER Client Relations
+          YUBI ESSENCE Client Relations
           <br />
           580 Fifth Avenue, Suite 1120
           <br />

@@ -7,9 +7,9 @@ export default function StoryPage() {
         </div>
         <div>
           <p className="kicker">Our House</p>
-          <h1 className="section-title mt-4">The Story of Noir Atelier</h1>
+          <h1 className="section-title mt-4">The Story of Yubi Essence</h1>
           <p className="mt-6 text-sm uppercase leading-relaxed tracking-[0.14em] text-secondary/72">
-            Built for modern fragrance collectors, Noir Atelier is a perfume house
+            Built for modern fragrance collectors, Yubi Essence is a perfume house
             focused on clean composition, rich materials, and refined design.
             Every release balances emotion, structure, and long-lasting signature.
           </p>

@@ -4,7 +4,7 @@ export default function PrivacyPolicyPage() {
       <p className="kicker">Legal</p>
       <h1 className="mt-4 font-display text-5xl leading-[0.95] md:text-6xl">Privacy Policy</h1>
       <p className="mt-6 max-w-3xl text-sm uppercase leading-relaxed tracking-[0.12em] text-secondary/70">
-        This policy explains how Noir Atelier collects, uses, and protects your personal information.
+        This policy explains how Yubi Essence collects, uses, and protects your personal information.
       </p>
 
       <div className="mt-10 space-y-6">

@@ -6,7 +6,7 @@ export default function ClientServicesPage() {
       <p className="kicker">Client Services</p>
       <h1 className="mt-4 font-display text-5xl leading-[0.95] md:text-6xl">How We Can Help</h1>
       <p className="mt-6 max-w-3xl text-sm uppercase leading-relaxed tracking-[0.12em] text-secondary/70">
-        We provide fragrance guidance, order support, delivery assistance, and post-purchase care for every Noir Atelier client.
+        We provide fragrance guidance, order support, delivery assistance, and post-purchase care for every Yubi Essence client.
       </p>
 
       <div className="mt-10 grid gap-6 md:grid-cols-3">
