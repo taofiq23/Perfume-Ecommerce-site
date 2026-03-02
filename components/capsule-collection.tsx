@@ -12,7 +12,6 @@ type CapsuleProduct = {
   size: string;
   price: string;
   tone: string;
-  image?: string;
 };
 
 const products: CapsuleProduct[] = [
@@ -22,8 +21,7 @@ const products: CapsuleProduct[] = [
     category: "men",
     size: "100ml",
     price: "$220",
-    tone: "from-[#e2d8c8] to-[#b59967]",
-    image: "/images/product-velvet-oud.jpg"
+    tone: "from-[#e2d8c8] to-[#b59967]"
   },
   {
     slug: "amber-noir",
@@ -31,8 +29,7 @@ const products: CapsuleProduct[] = [
     category: "men",
     size: "90ml",
     price: "$195",
-    tone: "from-[#dad0bf] to-[#9e7d49]",
-    image: "/images/product-amber-noir.webp"
+    tone: "from-[#dad0bf] to-[#9e7d49]"
   },
   {
     slug: "rose-ombre",
@@ -40,8 +37,7 @@ const products: CapsuleProduct[] = [
     category: "women",
     size: "75ml",
     price: "$175",
-    tone: "from-[#eadfda] to-[#b58e78]",
-    image: "/images/product-rose-ombre.jpg"
+    tone: "from-[#eadfda] to-[#b58e78]"
   },
   {
     slug: "midnight-musk",
@@ -49,8 +45,7 @@ const products: CapsuleProduct[] = [
     category: "women",
     size: "100ml",
     price: "$205",
-    tone: "from-[#dbd7d0] to-[#7f776b]",
-    image: "/images/product-midnight-musk.jpg"
+    tone: "from-[#dbd7d0] to-[#7f776b]"
   },
   {
     slug: "noir-reserve",
@@ -83,6 +78,38 @@ const products: CapsuleProduct[] = [
     size: "75ml",
     price: "$190",
     tone: "from-[#dfd9d0] to-[#8e8478]"
+  },
+  {
+    slug: "obsidian-tonka",
+    name: "Obsidian Tonka",
+    category: "men",
+    size: "100ml",
+    price: "$240",
+    tone: "from-[#d8d0c2] to-[#6f5b3b]"
+  },
+  {
+    slug: "silk-amber",
+    name: "Silk Amber",
+    category: "women",
+    size: "90ml",
+    price: "$225",
+    tone: "from-[#eadfcd] to-[#ae8a61]"
+  },
+  {
+    slug: "black-saffron",
+    name: "Black Saffron",
+    category: "men",
+    size: "75ml",
+    price: "$198",
+    tone: "from-[#ddd2c0] to-[#806645]"
+  },
+  {
+    slug: "velvet-rose",
+    name: "Velvet Rose",
+    category: "women",
+    size: "100ml",
+    price: "$230",
+    tone: "from-[#ead7d3] to-[#9c7464]"
   }
 ];
 
@@ -97,68 +124,112 @@ export function CapsuleCollection() {
   }, [activeTab]);
 
   return (
-    <section className="py-12 md:py-20">
-      <div className="container-luxe">
-        <div className="mb-10 border-b border-black/10 pb-8 text-center">
-          <p className="kicker text-xs tracking-[0.24em] text-black/60">Fragrance Wardrobe</p>
-          <h2 className="mt-4 font-display text-5xl leading-[0.92] md:text-7xl">Shop The Collection</h2>
-          <p className="mx-auto mt-5 max-w-2xl text-xs uppercase leading-relaxed tracking-[0.12em] text-black/50">
-            Explore signature bottles crafted for long wear, character, and modern luxury.
-          </p>
+    <section className="py-16 md:py-24">
+      <div className="px-5 md:px-10">
+        <div className="mb-12 border-b border-black/10 pb-10 text-center">
+          <div className="mx-auto max-w-4xl">
+            <p className="kicker text-xs tracking-[0.25em] text-black/60">EXCLUSIVE FRAGRANCES</p>
+            <h2 className="mt-4 font-display text-4xl leading-[0.95] md:text-5xl">Explore The Collection</h2>
+            <p className="mx-auto mt-6 max-w-xl text-xs uppercase leading-relaxed tracking-[0.08em] text-black/50">
+              A curated selection of signature scents crafted with precision and passion
+            </p>
+          </div>
         </div>
 
-        <div className="mb-8 flex items-center gap-3 overflow-x-auto border-b border-black/10 pb-4">
-          {(["all", "men", "women"] as const).map((tab) => {
-            const active = activeTab === tab;
-            const label = tab === "all" ? "All" : tab === "men" ? "For Him" : "For Her";
-            return (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`shrink-0 border px-4 py-2 text-xs uppercase tracking-[0.16em] transition ${
-                  active
-                    ? "border-black bg-black text-white"
-                    : "border-black/20 text-black/65 hover:border-black hover:text-black"
-                }`}
-              >
-                {label}
-              </button>
-            );
-          })}
+        <div className="mb-12 flex flex-wrap items-center justify-center gap-10 border-b border-black/10 pb-6">
+          <button
+            onClick={() => setActiveTab("all")}
+            className={`pb-2 text-xs uppercase tracking-[0.2em] transition-all duration-300 ${
+              activeTab === "all"
+                ? "border-b border-black text-black"
+                : "text-black/40 hover:text-black"
+            }`}
+          >
+            All
+          </button>
+          <button
+            onClick={() => setActiveTab("men")}
+            className={`pb-2 text-xs uppercase tracking-[0.2em] transition-all duration-300 ${
+              activeTab === "men"
+                ? "border-b border-black text-black"
+                : "text-black/40 hover:text-black"
+            }`}
+          >
+            For Him
+          </button>
+          <button
+            onClick={() => setActiveTab("women")}
+            className={`pb-2 text-xs uppercase tracking-[0.2em] transition-all duration-300 ${
+              activeTab === "women"
+                ? "border-b border-black text-black"
+                : "text-black/40 hover:text-black"
+            }`}
+          >
+            For Her
+          </button>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {visibleProducts.map((product) => (
-            <article key={product.slug} className="group border border-black/10 bg-white">
-              <Link href={`/product/${product.slug}`} className="block overflow-hidden border-b border-black/10">
-                {product.image ? (
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="aspect-[4/5] w-full object-cover transition-transform duration-500 md:group-hover:scale-[1.03]"
-                  />
-                ) : (
-                  <div className={`aspect-[4/5] w-full bg-gradient-to-b ${product.tone} transition-transform duration-500 md:group-hover:scale-[1.03]`} />
-                )}
-              </Link>
-
-              <div className="p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="font-display text-2xl leading-[1]">{product.name}</p>
-                    <p className="mt-2 text-xs uppercase tracking-[0.14em] text-black/50">
-                      {product.category === "men" ? "Men's" : "Women's"} / {product.size}
-                    </p>
+            <article key={product.slug} className="group relative">
+              <div className="relative overflow-hidden">
+                <Link href={`/product/${product.slug}`} className="luxe-image block">
+                  <div className={`relative aspect-[4/5] bg-gradient-to-b ${product.tone} transition-all duration-500 md:group-hover:scale-105`}>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-medium uppercase tracking-[0.15em] text-white/90">
+                          {product.category === 'men' ? 'HIM' : 'HER'}
+                        </span>
+                        <span className="text-xs font-medium uppercase tracking-[0.15em] text-white/90">
+                          {product.size}
+                        </span>
+                      </div>
+                    </div>
+                    {/* Hover overlay with details */}
+                    <div className="absolute inset-0 bg-black/15 transition-all duration-300 md:bg-black/0 md:group-hover:bg-black/40">
+                      <div className="absolute inset-0 hidden items-center justify-center opacity-0 transition-all duration-300 md:flex md:group-hover:opacity-100">
+                        <div className="text-center p-6">
+                          <div className="mb-4">
+                            <span className="inline-block border border-white/50 px-4 py-2 text-xs uppercase tracking-[0.2em] text-white">
+                              Quick View
+                            </span>
+                          </div>
+                          <p className="text-xs uppercase tracking-[0.15em] text-white/90 mt-4">
+                            {product.category === 'men' ? 'Men\'s Fragrance' : 'Women\'s Fragrance'}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="absolute bottom-4 left-4 text-xs uppercase tracking-[0.14em] text-white/95 md:hidden">
+                        {product.category === "men" ? "Men's Fragrance" : "Women's Fragrance"}
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-sm font-medium">{product.price}</p>
-                </div>
-
-                <Link
-                  href={`/product/${product.slug}`}
-                  className="mt-4 block w-full bg-black py-3 text-center text-xs uppercase tracking-[0.16em] text-white transition hover:bg-black/90"
-                >
-                  Add to Bag
                 </Link>
+                {/* Always visible product info */}
+                <div className="mt-4 text-center">
+                  <p className="font-display text-xl tracking-tight">{product.name}</p>
+                  <p className="mt-1 text-xs uppercase tracking-[0.15em] text-black/50">
+                    {product.category === 'men' ? 'Men\'s' : 'Women\'s'}
+                  </p>
+                  <p className="mt-2 text-sm font-medium tracking-[0.08em]">
+                    {product.price}
+                  </p>
+                </div>
+                <div className="mt-4 md:hidden">
+                  <Link
+                    href={`/product/${product.slug}`}
+                    className="block w-full bg-black py-3 text-center text-xs uppercase tracking-[0.15em] text-white"
+                  >
+                    Add to Bag
+                  </Link>
+                </div>
+                {/* Hidden button that appears on hover */}
+                <div className="absolute bottom-0 left-0 right-0 hidden translate-y-full opacity-0 transition-all duration-300 md:block md:group-hover:translate-y-0 md:group-hover:opacity-100">
+                  <button className="w-full bg-black py-3 text-xs uppercase tracking-[0.15em] text-white transition-all hover:bg-black/90">
+                    Add to Bag
+                  </button>
+                </div>
               </div>
             </article>
           ))}
