@@ -86,6 +86,46 @@ export const productMap: Record<string, ProductDetails> = {
       { label: "50 ml", price: "$132" },
       { label: "75 ml", price: "$190" }
     ]
+  },
+  "obsidian-tonka": {
+    name: "Obsidian Tonka",
+    family: "Warm Tonka",
+    description: "Roasted tonka, cocoa facets, and smoky woods for a rich evening signature.",
+    tone: "from-[#d8d0c2] to-[#6f5b3b]",
+    sizes: [
+      { label: "50 ml", price: "$170" },
+      { label: "100 ml", price: "$240" }
+    ]
+  },
+  "silk-amber": {
+    name: "Silk Amber",
+    family: "Soft Amber",
+    description: "Silken amber wrapped in delicate florals and creamy sandalwood.",
+    tone: "from-[#eadfcd] to-[#ae8a61]",
+    sizes: [
+      { label: "50 ml", price: "$155" },
+      { label: "90 ml", price: "$225" }
+    ]
+  },
+  "black-saffron": {
+    name: "Black Saffron",
+    family: "Spiced Leather",
+    description: "Saffron spice over dark leather and cedar for a bold modern trail.",
+    tone: "from-[#ddd2c0] to-[#806645]",
+    sizes: [
+      { label: "50 ml", price: "$145" },
+      { label: "75 ml", price: "$198" }
+    ]
+  },
+  "velvet-rose": {
+    name: "Velvet Rose",
+    family: "Rose Amber",
+    description: "Velvety rose petals blended with amber and warm musks.",
+    tone: "from-[#ead7d3] to-[#9c7464]",
+    sizes: [
+      { label: "50 ml", price: "$160" },
+      { label: "100 ml", price: "$230" }
+    ]
   }
 };
 

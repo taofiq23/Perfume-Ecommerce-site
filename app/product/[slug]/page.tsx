@@ -4,6 +4,12 @@ import { ProductBuyPanel } from "@/components/product/product-buy-panel";
 import { ProductMediaGallery } from "@/components/product/product-media-gallery";
 import { productMap, ratingBreakdown, reviews, topRatedOrder } from "./product-data";
 
+export function generateStaticParams() {
+  return Object.keys(productMap).map((slug) => ({ slug }));
+}
+
+export const dynamicParams = false;
+
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const product = productMap[params.slug];
 
