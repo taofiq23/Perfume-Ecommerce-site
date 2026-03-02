@@ -89,33 +89,15 @@ export function SiteHeader() {
           </div>
         </div>
 
-        <div className="container-luxe flex h-[66px] items-center justify-between text-xs uppercase tracking-[0.2em] md:h-[86px]">
+        <div className="container-luxe flex h-16 items-center justify-between text-xs uppercase tracking-[0.2em] md:h-[86px]">
           <button className="hidden md:inline-block" onClick={() => setMenuOpen(true)} aria-label="Open menu">
             Menu
           </button>
-          <Link href="/" className="font-display text-[44px] leading-none text-black md:text-[30px]">
-            <span className="tracking-[0.18em]">YUBI</span>
-            <span className="hidden md:inline-block md:ml-2 md:tracking-[0.14em]">ESSENCE</span>
+          <Link href="/" className="font-display text-[22px] font-semibold text-black md:text-[30px]">
+            <span className="tracking-[0.2em]">YUBI</span>
+            <span className="ml-2 tracking-[0.14em]">ESSENCE</span>
           </Link>
-          <div className="flex items-center gap-3 md:gap-6">
-            <button className="inline-flex md:hidden" aria-label="Shopping bag">
-              <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" aria-hidden="true">
-                <path d="M6 8h12l-1 12H7L6 8Z" stroke="currentColor" strokeWidth="1.4" />
-                <path d="M9 8V6a3 3 0 1 1 6 0v2" stroke="currentColor" strokeWidth="1.4" />
-              </svg>
-            </button>
-            <Link href="/account" className="inline-flex md:hidden" aria-label="Account">
-              <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" aria-hidden="true">
-                <path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" stroke="currentColor" strokeWidth="1.5" />
-                <path d="M4.5 20.1a7.5 7.5 0 0115 0" stroke="currentColor" strokeWidth="1.5" />
-              </svg>
-            </Link>
-            <button className="inline-flex md:hidden" aria-label="Search">
-              <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" aria-hidden="true">
-                <circle cx="11" cy="11" r="6.2" stroke="currentColor" strokeWidth="1.5" />
-                <path d="M16 16L20 20" stroke="currentColor" strokeWidth="1.5" />
-              </svg>
-            </button>
+          <div className="flex items-center gap-6">
             <button className="hidden items-center gap-2 md:inline-flex" aria-label="Shopping bag">
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
                 <path d="M6 8h12l-1 12H7L6 8Z" stroke="currentColor" strokeWidth="1.4" />
@@ -132,9 +114,7 @@ export function SiteHeader() {
               aria-label="Toggle side menu"
               aria-expanded={menuOpen}
             >
-              <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" aria-hidden="true">
-                <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.5" />
-              </svg>
+              Menu
             </button>
           </div>
         </div>
